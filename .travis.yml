@@ -1,0 +1,27 @@
+language: python
+
+python:
+  - pypy
+  - pypy3
+  - 2.6
+  - 2.7
+  - 3.2
+  - 3.3
+  - 3.4
+
+install:
+  - sudo apt-get build-dep python-pygame
+  - pip install hg+http://bitbucket.org/pygame/pygame
+  - pip install pillow
+
+script:
+  - cd test
+  - ./test.sh
+
+after_success:
+  - pip install pep8 pyflakes
+  - pep8 --statistics --count .
+  - pyflakes . | tee >(wc -l)
+
+matrix:
+  fast_finish: true
