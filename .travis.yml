@@ -11,7 +11,7 @@ python:
 
 install:
   - sudo apt-get build-dep python-pygame
-  - pip install hg+http://bitbucket.org/pygame/pygame
+  - pip install pygame
   - pip install pillow
 
 script:
@@ -24,4 +24,18 @@ after_success:
   - pyflakes . | tee >(wc -l)
 
 matrix:
+  allow_failures:
+    - python: pypy
+    - python: pypy3
+    - python: 2.6
+    - python: 3.2
+    - python: 3.3
+    - python: 3.4
+  - 2.6
+  - 2.7
+  - 3.2
+  - 3.3
+  - 3.4
+
+
   fast_finish: true
